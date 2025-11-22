@@ -1,5 +1,5 @@
 html { 
-  font-family: sans-serif; 
+  font-family: monospace; 
   background: #f3e8ff;   /* pale lavender */
   padding: 1rem; 
 }
@@ -11,7 +11,7 @@ body {
 }
 
 h1 { 
-  font-family: serif; 
+  font-family: monospace; 
   color: #7c3aed;       /* vivid purple */
   margin: 1rem 0; 
 }
