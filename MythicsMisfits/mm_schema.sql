@@ -28,6 +28,18 @@ CREATE TABLE IF NOT EXISTS items (
              item_weight INTEGER NOT NULL,
              item_value INTEGER NOT NULL);
 
+INSERT INTO items (item_name, item_type, item_weight, item_value) VALUES
+('Iron Sword', 'Weapon', 6, 25),
+('Wooden Shield', 'Armor', 8, 18),
+('Healing Potion', 'Consumable', 1, 50),
+('Leather Boots', 'Armor', 3, 12),
+('Arcane Spellbook', 'Magic', 4, 120),
+('Steel Dagger', 'Weapon', 2, 15),
+('Hunter’s Bow', 'Weapon', 3, 40),
+('Mystic Amulet', 'Magic', 1, 200),
+('Adventurer’s Pack', 'Gear', 10, 30),
+('Firebomb', 'Consumable', 1, 60);
+
 CREATE TABLE IF NOT EXISTS inventory (
              character_id INTEGER,
              item_id INTEGER,
@@ -39,7 +51,31 @@ CREATE TABLE IF NOT EXISTS classes (
              class_name TEXT PRIMARY KEY,
              class_ability TEXT NOT NULL);
 
+INSERT INTO classes (class_name, class_ability) VALUES
+('Barbarian', 'A fierce warrior fueled by rage, dealing massive melee damage.'),
+('Bard', 'A versatile performer who uses music and magic to inspire allies.'),
+('Cleric', 'A holy spellcaster with powerful healing and protective abilities.'),
+('Druid', 'A nature-bound caster who can shapeshift into beasts.'),
+('Fighter', 'A master of weapons and armor with unmatched combat versatility.'),
+('Monk', 'A martial artist using ki to perform supernatural techniques.'),
+('Paladin', 'A holy knight combining divine magic with melee combat.'),
+('Ranger', 'A wilderness scout specializing in ranged attacks and animal companions.'),
+('Rogue', 'A stealthy trickster skilled in sneak attacks and traps.'),
+('Wizard', 'A scholar of arcane magic with potent offensive spells.');
+
 CREATE TABLE IF NOT EXISTS quests (
              quest_id INTEGER PRIMARY KEY AUTOINCREMENT,
              quest_enemy TEXT NOT NULL,
              quest_reward TEXT NOT NULL);
+
+INSERT INTO quests (quest_enemy, quest_reward) VALUES
+('Goblin Chief', '50 gold'),
+('Forest Troll', 'Enchanted bow'),
+('Undead Knight', '120 gold'),
+('Cave Spider Queen', 'Potion bundle'),
+('Bandit Captain', 'Steel armor'),
+('Fire Drake', 'Rare gemstones'),
+('Haunted Spirit', 'Blessed amulet'),
+('Ogre Brute', '200 gold'),
+('Swamp Lizardlord', 'Poison-resistant cloak'),
+('Mountain Giant', 'Chest of coins');
