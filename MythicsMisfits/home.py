@@ -95,6 +95,10 @@ def editcharacter(character_id):
         'SELECT * FROM quests'
     ).fetchall()
 
+    classes = db.execute(
+        'SELECT * FROM classes'
+    ).fetchall()
+
     if request.method == 'POST':
         print(request.form)
         character_name = request.form['character_name']
@@ -123,7 +127,7 @@ def editcharacter(character_id):
 
         flash(error)
 
-    return render_template('home/editcharacter.html', character=character, quests=quests)
+    return render_template('home/editcharacter.html', character=character, quests=quests, classes=classes)
 
 @bp.route('/character/<int:character_id>/delete', methods=('POST',))
 @login_required

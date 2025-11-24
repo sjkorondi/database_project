@@ -10,14 +10,21 @@
     <input name="character_name" id="character_name" required value="{{ character.character_name }}">
     <label for="level">Character Level</label>
     <input name="level" id="level" required value="{{ character.level }}">
-    <label for="class_id">Class ID</label>
-    <input name="class_id" id="class_id" required value="{{ character.class_id }}">
+    <label for="class_id"></label>
+    <select name="class_id" id="class_id" required>
+    {% for class in classes %}
+        <option value="{{ class.class_name }}"
+                {% if class.class_name == character.class_id %}selected{% endif %}>
+        {{ class.class_name }}: {{ class.class_description }}
+        </option>
+    {% endfor %}
+    </select>
     <label for="quest_id">Quest</label>
     <select name="quest_id" id="quest_id" required>
     {% for quest in quests %}
         <option value="{{ quest.quest_id }}"
                 {% if quest.quest_id == character.quest_id %}selected{% endif %}>
-        Enemy: {{ quest.quest_enemy }}, Reward: {{ quest.quest_reward }}
+        Enemy:{{ quest.quest_enemy }}, Reward: {{ quest.quest_reward }}
         </option>
     {% endfor %}
     </select>

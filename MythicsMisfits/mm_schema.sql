@@ -15,10 +15,10 @@ CREATE TABLE IF NOT EXISTS users (
                 user_id INTEGER,
                 character_name TEXT NOT NULL,
                 level INTEGER DEFAULT 1,
-                class_id INTEGER,
+                class_id TEXT NOT NULL,
                 quest_id INTEGER,
                 FOREIGN KEY (user_id) REFERENCES users(user_id),
-                FOREIGN KEY (class_id) REFERENCES classes(class_id),
+                FOREIGN KEY (class_id) REFERENCES classes(class_name),
                 FOREIGN KEY (quest_id) REFERENCES quests(quest_id));
 
 CREATE TABLE IF NOT EXISTS items (
