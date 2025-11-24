@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Items{% endblock %}</h1>
+  <p>{% block page %}These are the items you can take on your adventure:{% endblock %}</p>
+{% endblock %}
+
+{% block content %}
+  <div class="item-list">
+    {% for item in items %}
+      <div class="item-card">
+        <h2>{{ item.item_name }}</h2>
+        <ul>
+          <li><strong>Type:</strong> {{ item.item_type }}</li>
+          <li><strong>Weight:</strong> {{ item.item_weight }}</li>
+          <li><strong>Value:</strong> {{ item.item_value }}</li>
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

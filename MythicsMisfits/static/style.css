@@ -64,7 +64,6 @@ header .action {
 
 .content > header { 
   border-bottom: 1px solid #d8b4fe; 
-  display: flex; 
   align-items: flex-end; 
 }
 
@@ -80,28 +79,28 @@ header .action {
   border: 1px solid #7c3aed; 
 }
 
-.post > header { 
-  display: flex; 
+header { 
+  display: block; 
   align-items: flex-end; 
   font-size: 0.85em; 
 }
 
-.post > header > div:first-of-type { 
+header > div:first-of-type { 
   flex: auto; 
 }
 
-.post > header h1 { 
-  font-size: 1.5em; 
+header h1 { 
+  font-size: 3em; 
   margin-bottom: 0; 
   color: #7c3aed; 
 }
 
-.post .about { 
+.about { 
   color: #6b7280; 
   font-style: italic; 
 }
 
-.post .body { 
+.body { 
   white-space: pre-line; 
 }
 
@@ -147,4 +146,34 @@ input[type=submit] {
 
 input[type=submit]:hover {
   background: #5b21b6; 
+}
+
+.item-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.item-card {
+  background: #f5f3ff;              /* ultra-light purple */
+  border: 1px solid #d8b4fe;        /* light lavender border */
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.item-card h2 {
+  margin: 0 0 0.5rem 0;
+  color: #5b21b6;                   /* deep purple */
+  font-size: 1.2rem;
+}
+
+.item-card ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.item-card li {
+  margin: 0.25rem 0;
 }

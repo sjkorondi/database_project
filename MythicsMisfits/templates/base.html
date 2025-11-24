@@ -2,7 +2,9 @@
 <title>{% block title %}{% endblock %} - Flaskr</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
+  <a href="{{ url_for('home.index') }}">
     <img src="{{ url_for('static', filename='d20_img.png') }}" alt="Mythics and Misfits Logo" width="108" height="72">
+  </a>
   <h1>Mythics and Misfits</h1>
   <ul>
     {% if g.user %}

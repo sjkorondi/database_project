@@ -1,1 +1,41 @@
-<h1>test</h1>
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Dashboard{% endblock %}</h1>
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('home.makecharacter') }}">Create a Character</a></li>
+      <li><a href="{{ url_for('home.classes') }}">View Character Classes</a></li>
+      <li><a href="{{ url_for('home.items') }}">View Items</a></li>
+      <li><a href="{{ url_for('home.quests') }}">View Quests</a></li>
+    </ul>
+  </nav>
+{% endblock %}
+
+{% block content %}
+  {% if not g.user %}
+    <p>Welcome to Mythics and Misfits! Please log in or register to manage your characters and embark on quests.</p>
+  {% else %}
+    <p>Welcome back, {{ g.user['username'] }}! Here are your characters and some from other adventurers:</p>
+  <h2>Your Characters</h2>
+  {% for char in mychars %}
+    <div class="item-card">
+      <h2>{{ char.character_name }}</h2>
+      <ul>
+        <li><strong>Class:</strong> {{ char.class_id }}</li>
+        <li><strong>Level:</strong> {{ char.level }}</li>
+      </ul>
+    </div>
+  {% endfor %}
+  <h2>Other's Characters</h2>
+  {% for char in otherchars %}
+    <div class="item-card">
+      <h2>{{ char.character_name }}</h2>
+      <ul>
+        <li><strong>Class:</strong> {{ char.class_id }}</li>
+        <li><strong>Level:</strong> {{ char.level }}</li>
+      </ul>
+    </div>
+  {% endfor %}
+  {% endif %}
+{% endblock %}

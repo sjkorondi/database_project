@@ -11,8 +11,68 @@ bp = Blueprint('home', __name__)
 @bp.route('/')
 def index():
     db = get_db()
-    chars = db.execute(
-        'SELECT * FROM characters'
-        ' ORDER BY character_name ASC'
-    ).fetchall()
-    return render_template('home/index.html', chars=chars)
+    if g.user is None:
+        return render_template('home/index.html', mychars=None, otherchars=None)
+    mychars = db.execute(
+        'SELECT * FROM characters '
+        'WHERE user_id = ? '
+        'ORDER BY character_name ASC', (g.user['user_id'],)).fetchall()
+    otherchars = db.execute(
+        'SELECT * FROM characters '
+        'WHERE user_id != ? '
+        'ORDER BY character_name ASC', (g.user['user_id'],)).fetchall()
+    return render_template('home/index.html', mychars=mychars, otherchars=otherchars)
+
+@bp.route('/items')
+def items():
+    db = get_db()
+    items = db.execute(
+        'SELECT * FROM items '
+        'ORDER BY item_name ASC').fetchall()
+    return render_template('home/items.html', items=items)
+
+@bp.route('/quests')
+def quests():
+    db = get_db()
+    quests = db.execute(
+        'SELECT * FROM quests '
+        'ORDER BY quest_id ASC').fetchall()
+    return render_template('home/quests.html', quests=quests)
+
+@bp.route('/classes')
+def classes():
+    db = get_db()
+    classes = db.execute(
+        'SELECT * FROM classes '
+        'ORDER BY class_name ASC').fetchall()
+    return render_template('home/classes.html', classes=classes)
+
+@bp.route('/character/make', methods=('GET', 'POST'))
+@login_required
+def makecharacter():
+    if request.method == 'POST':
+        character_name = request.form['character_name']
+        class_id = request.form['class_id']
+        level = request.form['level']
+        db = get_db()
+        error = None
+
+        if not character_name:
+            error = 'Character name is required.'
+        elif not class_id:
+            error = 'Class ID is required.'
+        elif not level or not level.isdigit() or int(level) < 1:
+            error = 'Level must be a positive integer.'
+
+        if error is None:
+            db.execute(
+                'INSERT INTO characters (character_name, class_id, level, user_id) '
+                'VALUES (?, ?, ?, ?)',
+                (character_name, class_id, int(level), g.user['user_id'])
+            )
+            db.commit()
+            return redirect(url_for('home.index'))
+
+        flash(error)
+
+    return render_template('home/makecharacter.html')

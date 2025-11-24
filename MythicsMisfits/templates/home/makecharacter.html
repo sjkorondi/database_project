@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Create A New Character{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="character_name">Character Name</label>
+    <input name="character_name" id="character_name" required>
+    <label for="class_id">Class ID</label>
+    <input name="class_id" id="class_id" required>
+    <input type="submit" value="Create Character">
+  </form>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Classes{% endblock %}</h1>
+  <p>{% block page %}These are the many classes your characters can be:{% endblock %}</p>
+{% endblock %}
+
+{% block content %}
+  <div class="item-list">
+    {% for class in classes %}
+      <div class="item-card">
+        <h2>{{ class.class_name }}</h2>
+        <p>{{ class.class_ability }}</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

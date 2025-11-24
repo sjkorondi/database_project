@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Quests{% endblock %}</h1>
+  <p>{% block page %}These are quests available to your character:{% endblock %}</p>
+{% endblock %}
+
+{% block content %}
+  <div class="item-list">
+    {% for quest in quests %}
+      <div class="item-card">
+        <h2>Quest {{ quest.quest_id }}:</h2>
+        <p>Battle a {{ quest.quest_enemy }} and earn {{ quest.quest_reward }} should you succeed!</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
