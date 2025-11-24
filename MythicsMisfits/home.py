@@ -77,3 +77,20 @@ def makecharacter():
         flash(error)
 
     return render_template('home/makecharacter.html')
+
+@bp.route('/character/<int:character_id>/delete', methods=('POST',))
+@login_required
+def deletecharacter(character_id):
+    db = get_db()
+    character = db.execute(
+        'SELECT * FROM characters WHERE character_id = ?', (character_id,)
+    ).fetchone()
+
+    if character is None:
+        abort(404, f"Character id {character_id} doesn't exist.")
+    if character['user_id'] != g.user['user_id']:
+        abort(403)
+
+    db.execute('DELETE FROM characters WHERE character_id = ?', (character_id,))
+    db.commit()
+    return redirect(url_for('home.index'))
