@@ -24,6 +24,7 @@
       <ul>
         <li><strong>Class:</strong> {{ char.class_id }}</li>
         <li><strong>Level:</strong> {{ char.level }}</li>
+        <li><strong>Current Quest ID:</strong> {{ char.quest_id }}</li>
       </ul>
     </div>
   {% endfor %}
@@ -32,8 +33,10 @@
     <div class="item-card">
       <h2>{{ char.character_name }}</h2>
       <ul>
+        <li><strong>Owner:</strong> {{ char.username }}</li>
         <li><strong>Class:</strong> {{ char.class_id }}</li>
         <li><strong>Level:</strong> {{ char.level }}</li>
+        <li><strong>Current Quest ID:</strong> {{ char.quest_id }}</li>
       </ul>
     </div>
   {% endfor %}

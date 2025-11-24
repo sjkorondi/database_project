@@ -18,9 +18,10 @@ def index():
         'WHERE user_id = ? '
         'ORDER BY character_name ASC', (g.user['user_id'],)).fetchall()
     otherchars = db.execute(
-        'SELECT * FROM characters '
-        'WHERE user_id != ? '
-        'ORDER BY character_name ASC', (g.user['user_id'],)).fetchall()
+        'SELECT characters.*, users.username '
+        'FROM characters JOIN users ON characters.user_id = users.user_id '
+        'WHERE characters.user_id != ? '
+        'ORDER BY characters.character_name ASC', (g.user['user_id'],)).fetchall()
     return render_template('home/index.html', mychars=mychars, otherchars=otherchars)
 
 @bp.route('/items')
