@@ -15,7 +15,7 @@
     {% for class in classes %}
         <option value="{{ class.class_name }}"
                 {% if class.class_name == character.class_id %}selected{% endif %}>
-        {{ class.class_name }}: {{ class.class_description }}
+        {{ class.class_name }}: {{ class.class_ability }}
         </option>
     {% endfor %}
     </select>

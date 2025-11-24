@@ -51,11 +51,15 @@ def classes():
 @bp.route('/character/make', methods=('GET', 'POST'))
 @login_required
 def makecharacter():
+    db = get_db()
+    classes = db.execute(
+            'SELECT * FROM classes'
+        ).fetchall()
+    
     if request.method == 'POST':
         character_name = request.form['character_name']
         class_id = request.form['class_id']
         level = request.form['level']
-        db = get_db()
         error = None
 
         if not character_name:
@@ -76,7 +80,7 @@ def makecharacter():
 
         flash(error)
 
-    return render_template('home/makecharacter.html')
+    return render_template('home/makecharacter.html', classes=classes)
 
 @bp.route('/character/<int:character_id>/edit', methods=('GET', 'POST'))
 @login_required
