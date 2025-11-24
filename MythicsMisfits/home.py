@@ -78,6 +78,53 @@ def makecharacter():
 
     return render_template('home/makecharacter.html')
 
+@bp.route('/character/<int:character_id>/edit', methods=('GET', 'POST'))
+@login_required
+def editcharacter(character_id):
+    db = get_db()
+    character = db.execute(
+        'SELECT * FROM characters WHERE character_id = ?', (character_id,)
+    ).fetchone()
+
+    if character is None:
+        abort(404, f"Character id {character_id} doesn't exist.")
+    if character['user_id'] != g.user['user_id']:
+        abort(403)
+
+    quests = db.execute(
+        'SELECT * FROM quests'
+    ).fetchall()
+
+    if request.method == 'POST':
+        print(request.form)
+        character_name = request.form['character_name']
+        class_id = request.form['class_id']
+        level = request.form['level']
+        quest = request.form['quest_id']
+        error = None
+
+        if not character_name:
+            error = 'Character name is required.'
+        elif not class_id:
+            error = 'Class ID is required.'
+        elif not level or not level.isdigit() or int(level) < 1:
+            error = 'Level must be a positive integer.'
+        elif not quest:
+            error = 'Quest ID is required.'
+
+        if error is None:
+            db.execute(
+                'UPDATE characters SET character_name = ?, class_id = ?, level = ?, quest_id = ? '
+                'WHERE character_id = ?',
+                (character_name, class_id, int(level), quest, character_id)
+            )
+            db.commit()
+            return redirect(url_for('home.index'))
+
+        flash(error)
+
+    return render_template('home/editcharacter.html', character=character, quests=quests)
+
 @bp.route('/character/<int:character_id>/delete', methods=('POST',))
 @login_required
 def deletecharacter(character_id):

@@ -28,6 +28,8 @@
       </ul>
       <nav>
         <ul>
+          <a href="{{ url_for('home.editcharacter', character_id=char.character_id) }}">Edit</a>
+
           <form action="{{ url_for('home.deletecharacter', character_id=char.character_id) }}" method="post" style="display:inline;">
             <input type="submit" value="Delete" class="danger">
           </form>

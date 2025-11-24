@@ -177,3 +177,15 @@ input[type=submit]:hover {
 .item-card li {
   margin: 0.25rem 0;
 }
+
+.button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #7c3aed;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+}
+.button:hover {
+  background: #5b21b6;
+}

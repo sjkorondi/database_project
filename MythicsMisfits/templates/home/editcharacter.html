@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Update Existing Character{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="character_name">Character Name</label>
+    <input name="character_name" id="character_name" required value="{{ character.character_name }}">
+    <label for="level">Character Level</label>
+    <input name="level" id="level" required value="{{ character.level }}">
+    <label for="class_id">Class ID</label>
+    <input name="class_id" id="class_id" required value="{{ character.class_id }}">
+    <label for="quest_id">Quest</label>
+    <select name="quest_id" id="quest_id" required>
+    {% for quest in quests %}
+        <option value="{{ quest.quest_id }}"
+                {% if quest.quest_id == character.quest_id %}selected{% endif %}>
+        Enemy: {{ quest.quest_enemy }}, Reward: {{ quest.quest_reward }}
+        </option>
+    {% endfor %}
+    </select>
+    <input type="submit" value="Update Character">
+  </form>
+{% endblock %}
